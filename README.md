@@ -1,6 +1,6 @@
 # Grapevine
 
-This is a sync client for ecomps. It syncs data from ecomps to the specified apps ([See supported apps](#Suppordet-apps)).
+This is a sync client for ecomps. It syncs data from ecomps to the specified apps ([See supported apps](#Supported-apps)).
 
 
 ## How to start
