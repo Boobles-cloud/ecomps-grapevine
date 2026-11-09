@@ -3,7 +3,6 @@ package repositorys
 import (
 	"context"
 	"errors"
-	"strconv"
 	"uuid"
 
 	vault "github.com/hashicorp/vault/api"
@@ -29,7 +28,7 @@ func CreateNewStackitRepository(c *vault.Client, dTP, dCP, instanceId string) *S
 
 func (s *StackitRepository) GetTenantPw(ctx context.Context, tenantId uuid.UUID) (smstructs.SecretEntry, error) {
 
-	secret, err := s.client.KVv2(s.instanceId).Get(ctx, tenantId.String())
+	secret, err := s.client.KVv2(s.instanceId).Get(ctx, s.defaultTenantPath+tenantId.String())
 
 	if err != nil {
 		return smstructs.SecretEntry{}, err
@@ -47,9 +46,9 @@ func (s *StackitRepository) GetTenantPw(ctx context.Context, tenantId uuid.UUID)
 	}, nil
 }
 
-func (s *StackitRepository) GetClientSecret(ctx context.Context, appId uint) (smstructs.SecretEntry, error) {
+func (s *StackitRepository) GetClientSecret(ctx context.Context, appKey string) (smstructs.SecretEntry, error) {
 
-	secret, err := s.client.KVv2(s.instanceId).Get(ctx, "Test123")
+	secret, err := s.client.KVv2(s.instanceId).Get(ctx, s.defaultClientSecretPath+"Test123")
 
 	if err != nil {
 		return smstructs.SecretEntry{}, err
@@ -62,7 +61,7 @@ func (s *StackitRepository) GetClientSecret(ctx context.Context, appId uint) (sm
 	}
 
 	return smstructs.SecretEntry{
-		Key:   strconv.Itoa(int(appId)),
+		Key:   appKey,
 		Value: dataMap,
 	}, nil
 }

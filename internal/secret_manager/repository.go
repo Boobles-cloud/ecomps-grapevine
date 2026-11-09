@@ -9,6 +9,6 @@ import (
 
 type SecretManagerRepository interface {
 	GetTenantPw(ctx context.Context, tenantId uuid.UUID) (smstructs.SecretEntry, error)
-	GetClientSecret(ctx context.Context, appId uint) (smstructs.SecretEntry, error)
+	GetClientSecret(ctx context.Context, appKey string) (smstructs.SecretEntry, error)
 	GetAllClientSecrets(ctx context.Context) ([]smstructs.SecretEntry, error)
 }
