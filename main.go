@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 
+	"grapevine.boobles.cloud/database"
 	"grapevine.boobles.cloud/startup"
 )
 
@@ -14,14 +15,14 @@ func main() {
 
 	defer cancel()
 
-	// 	dbHandler, err := database.CreateNewDbHandler()
-	//
-	// 	if err != nil {
-	// 		fmt.Println(err)
-	// 		os.Exit(1)
-	// 	}
+	dbHandler, err := database.CreateNewDbHandler()
 
-	// dbService := database.CreateNewDbService(dbHandler)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	dbService := database.CreateNewDbService(dbHandler)
 
 	secretmanager, err := startup.ConfigureSecretManagerWitPw(ctx)
 

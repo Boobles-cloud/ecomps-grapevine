@@ -67,5 +67,8 @@ func (s *StackitRepository) GetClientSecret(ctx context.Context, appKey string) 
 }
 
 func (s *StackitRepository) GetAllClientSecrets(ctx context.Context) ([]smstructs.SecretEntry, error) {
+
+	// TODO: do we really need this?
+
 	return []smstructs.SecretEntry{}, errors.ErrUnsupported
 }
